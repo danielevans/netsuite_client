@@ -28,7 +28,7 @@ class NetsuiteClient
 
   class PassportHeaderHandler < NetsuiteHeader
     Name = 'passport'
-    DefaultPrefs = {:account => '', :email => '', :password => ''}
+    DefaultPrefs = {:account => '', :email => '', :password => '', :role => ''}
   end
 
   attr_accessor :logger
@@ -41,7 +41,8 @@ class NetsuiteClient
     @config = config
 
     @driver = NetSuitePortType.new(@config[:endpoint_url] || NetSuitePortType::DefaultEndpointUrl)
-    @driver.headerhandler.add(PassportHeaderHandler.new(:email => @config[:email], :password => @config[:password], :account => @config[:account_id]))
+    @driver.headerhandler.add(PassportHeaderHandler.new(:email => @config[:email], :password => @config[:password],
+                                                        :account => @config[:account_id], :role => @config[:role]))
     @driver.headerhandler.add(PreferencesHeaderHandler.new)      
     @driver.headerhandler.add(SearchPreferencesHeaderHandler.new)
   end

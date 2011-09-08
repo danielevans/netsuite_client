@@ -4,7 +4,7 @@ class TestNetsuiteClient < Test::Unit::TestCase
   include NetSuite::SOAP
 
   def setup
-    #ENV['NS_ENDPOINT_URL'] ||= 'https://webservices.sandbox.netsuite.com/services/NetSuitePort_2009_1'
+    # ENV['NS_ENDPOINT_URL'] ||= 'https://webservices.sandbox.netsuite.com/services/NetSuitePort_2009_1'
 
     unless ENV['NS_ACCOUNT_ID'] && ENV['NS_EMAIL'] && ENV['NS_PASSWORD'] 
       puts "Ensure that your environment variables are set: NS_ACCOUNT_ID, NS_EMAIL, NS_PASSWORD"
@@ -12,7 +12,7 @@ class TestNetsuiteClient < Test::Unit::TestCase
     end
 
     @client = NetsuiteClient.new(:account_id => ENV['NS_ACCOUNT_ID'], :email => ENV['NS_EMAIL'], :password => ENV['NS_PASSWORD'])
-    #@client.debug = true
+    # @client.debug = true
   end
   
   def test_init
