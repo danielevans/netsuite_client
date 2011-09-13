@@ -131,6 +131,13 @@ class NetsuiteClient
     NetsuiteResult.new(res.writeResponse)
   end
 
+  # Pass-in a NetSuite::SOAP::InitializeRecord whose reference field points
+  # to a NetSuite::SOAP::InitializeRef associated with the source object.
+  def ns_initialize(ref)
+    res = @driver.ns_initialize(InitializeRequest.new(ref))
+    res && res.readResponse.status.xmlattr_isSuccess ? res.readResponse.record : nil
+  end
+
   private
 
   # Get the full result set (possibly across multiple pages).
