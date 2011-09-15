@@ -95,10 +95,16 @@ class NetsuiteClient
     full_basic_search(basic)
   end
 
-  def get(klass, id)
+  # Supported options for the search key are :internalId and :externalId
+  def get(klass, id, search_key = :internalId)
     ref = RecordRef.new
     ref.xmlattr_type = constantize(klass)
-    ref.xmlattr_internalId = id
+    case search_key
+    when :externalId
+      ref.xmlattr_externalId = id
+    else
+      ref.xmlattr_internalId = id
+    end
 
     res = @driver.get(GetRequest.new(ref))
     res && res.readResponse.status.xmlattr_isSuccess ? res.readResponse.record : nil
